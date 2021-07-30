@@ -33,7 +33,7 @@ DEFINES += $(DEFINES_LIB)
 ifeq ($(TARGET_NAME),TARGET_NANOX)
 	ICONNAME=icons/nanox_app_safecoin.gif
 else
-	ICONNAME=icons/nanos_app_safecoin.gif
+	ICONNAME=icons/nanos_app_safecoin2.gif
 endif
 
 ################
