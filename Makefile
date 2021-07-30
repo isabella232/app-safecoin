@@ -24,16 +24,16 @@ APPVERSION_M=1
 APPVERSION_N=0
 APPVERSION_P=5
 APPVERSION=$(APPVERSION_M).$(APPVERSION_N).$(APPVERSION_P)
-APPNAME = "Solana"
+APPNAME = "Safecoin"
 
-APP_LOAD_PARAMS = --curve ed25519 --path "44'/501'" --appFlags 0x240 $(COMMON_LOAD_PARAMS)
+APP_LOAD_PARAMS = --curve ed25519 --path "44'/19165'" --appFlags 0x240 $(COMMON_LOAD_PARAMS)
 
 DEFINES += $(DEFINES_LIB)
 
 ifeq ($(TARGET_NAME),TARGET_NANOX)
-	ICONNAME=icons/nanox_app_solana.gif
+	ICONNAME=icons/nanox_app_safecoin.gif
 else
-	ICONNAME=icons/nanos_app_solana.gif
+	ICONNAME=icons/nanos_app_safecoin2.gif
 endif
 
 ################
@@ -56,7 +56,7 @@ DEFINES += NDEBUG
 
 # U2F
 DEFINES   += HAVE_U2F HAVE_IO_U2F
-DEFINES   += U2F_PROXY_MAGIC=\"~SOL\"
+DEFINES   += U2F_PROXY_MAGIC=\"~SAFE\"
 DEFINES   += USB_SEGMENT_SIZE=64
 DEFINES   += BLE_SEGMENT_SIZE=32 #max MTU, min 20
 
@@ -174,4 +174,4 @@ deps:
 	python3 -mpip install -r requirements.txt --require-hashes
 
 listvariants:
-	@echo VARIANTS COIN solana
+	@echo VARIANTS COIN safecoin
