@@ -1,91 +1,44 @@
-[![Build Status](https://travis-ci.org/solana-labs/ledger-app-solana.svg?branch=master)](https://travis-ci.org/solana-labs/ledger-app-solana)
-
-# Solana app for Ledger Wallet
+# Safecoin app for Ledger Wallet
 
 ## Overview
 
-This app adds support for the Solana native token to Ledger Nano S hardware wallet.
+This app adds support for the Safecoin native token to Ledger Nano S hardware wallet.
 
 Current Features:
 - Pubkey queries
-- Parse, display and sign all Solana CLI generated transaction formats
+- Parse, display and sign all Safecoin CLI generated transaction formats
 - Blind sign arbitrary transactions (Enabled via settings)
 
 ## Prerequisites
 
-Install Vagrant and VirtualBox.
+Building requires the ledger-app-builder container.
 
-Clone this git repo recursively, such that it includes the BOLOS SDK in a submodule:
+https://github.com/LedgerHQ/ledger-app-builder
 
-```bash
-$ git clone --recursive git@github.com:solana-labs/ledger-app-solana.git
-cd ledger-app-solana
-```
-
-## Creating the development environment
-
-To start the Ubuntu 18.04 VM:
+## Building
 
 ```bash
-$ vagrant up
+# docker can be replaced with podman or buildah without sudo
+sudo docker run --rm -ti -v "$(realpath .):/app" ledger-app-builder:latest ./build.sh
 ```
 
-To enter the VM:
+binaries will be placed in release/nanoS and release/nanoX
+
+## Installing
+
+to install the app on a NanoS run:
 
 ```bash
-$ vagrant ssh
+./install_nanoS.sh
 ```
 
-## Alternative Setup, For those not using Vagrant
+Note: It's currently not possible to sideload an app onto the NanoX.
 
-To build and install the app on your Ledger Nano S you must set up the Ledger Nano S build environments. Please follow the Getting Started instructions at [here](https://ledger.readthedocs.io/en/latest/userspace/getting_started.html).
+## Emulating
 
-If you don't want to setup a global environnment, you can also setup one just for this app by sourcing `prepare-devenv.sh` with the right target (`s` or `x`).
+The app can be run by the Ledger Speculos emulator:
+https://github.com/LedgerHQ/speculos
 
-install prerequisite and switch to a Nano X dev-env:
-
-```bash
-sudo apt install python3-venv python3-dev libudev-dev libusb-1.0-0-dev
-
-# (x or s, depending on your device)
-source prepare-devenv.sh x
-```
-
-## Building and installing
-
-Compile:
-
-```bash
-make
-```
-
-Refresh the repo (required after Makefile edits):
-```bash
-make clean
-```
-
-To load the app onto the device, from the *host* machine:
-
-```bash
-make -f host.mk load
-```
-
-Remove the app from the device:
-
-```bash
-make -f host.mk delete
-```
-
-
-## Example of Ledger wallet functionality
-
-```bash
-cd tests
-cargo run
-```
-
-## Documentation
-
-This follows the specification available in the [`api.md`](doc/api.md).
-In this project we'll create a Linux virtual machine capable of cross-compiling the
-Ledger Wallet boilerplate application and then loading it onto Ledger Nano S.
+The elf files are located at:
+release/nanoS/bin/app.elf
+release/nanoX/bin/app.elf
