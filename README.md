@@ -29,7 +29,7 @@ binaries will be placed in release/nanoS and release/nanoX
 to install the app on a NanoS run:
 
 ```bash
-release/nanoS/./install.sh
+./install_nanoS.sh
 ```
 
 Note: It's currently not possible to sideload an app onto the NanoX.
