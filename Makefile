@@ -22,13 +22,17 @@ include $(BOLOS_SDK)/Makefile.defines
 
 APPVERSION_M=1
 APPVERSION_N=0
-APPVERSION_P=5
+APPVERSION_P=1
 APPVERSION=$(APPVERSION_M).$(APPVERSION_N).$(APPVERSION_P)
 APPNAME = "Safecoin"
 
 APP_LOAD_PARAMS = --curve ed25519 --path "44'/19165'" --appFlags 0x240 $(COMMON_LOAD_PARAMS)
 
 DEFINES += $(DEFINES_LIB)
+
+# Pending review parameters
+APP_LOAD_PARAMS += --tlvraw 9F:01
+DEFINES += HAVE_PENDING_REVIEW_SCREEN
 
 ifeq ($(TARGET_NAME),TARGET_NANOX)
 	ICONNAME=icons/nanox_app_safecoin.gif
